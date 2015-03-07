@@ -1,0 +1,280 @@
+@import "normalize.scss";
+
+
+// Mixins
+
+@mixin vendor-prefix($name, $argument) {
+  -webkit-#{$name}: #{$argument};
+  -ms-#{$name}: #{$argument};
+  -moz-#{$name}: #{$argument};
+  -o-#{$name}: #{$argument};
+  #{$name}: #{$argument};
+}
+
+@mixin keyframes( $animationName ) {
+  @-webkit-keyframes $animationName {
+      @content;
+  }
+  @-moz-keyframes $animationName {
+      @content;
+  }
+  @-o-keyframes $animationName {
+      @content;
+  }
+  @keyframes $animationName {
+      @content;
+  }
+}
+
+// Animations
+
+$body-animation-time: .4s;
+$body-color: rgb(195, 195, 195);
+$body-width: 20px;
+$body-height: $body-width * 2;
+$body-border: ($body-width / 20) solid #222;
+$body-animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1.0);
+
+@include keyframes(bounce) {
+  0% {
+    bottom: $body-height * 1.25;
+  }
+
+  50% {
+    bottom: $body-height;
+  }
+
+  100% {
+    bottom: $body-height * 1.25;
+  }
+}
+
+@include keyframes(upper-arm-right) {
+  0% {
+    @include vendor-prefix(transform, rotate(50deg));
+  }
+
+  50% {
+    @include vendor-prefix(transform, rotate(-40deg));
+  }
+
+  100% {
+    @include vendor-prefix(transform, rotate(50deg));
+  }
+}
+
+@include keyframes(upper-arm-left) {
+  0% {
+    @include vendor-prefix(transform, rotate(-40deg));
+  }
+
+  50% {
+    @include vendor-prefix(transform, rotate(50deg));
+  }
+
+  100% {
+    @include vendor-prefix(transform, rotate(-40deg));
+  }
+}
+
+@include keyframes(leg-right) {
+  0% {
+    @include vendor-prefix(transform, rotate(-40deg));
+  }
+
+  50% {
+    @include vendor-prefix(transform, rotate(20deg));
+  }
+
+  100% {
+    @include vendor-prefix(transform, rotate(-40deg));
+  }
+}
+
+@include keyframes(leg-left) {
+  0% {
+    @include vendor-prefix(transform, rotate(20deg));
+  }
+
+  50% {
+    @include vendor-prefix(transform, rotate(-40deg));
+  }
+
+  100% {
+    @include vendor-prefix(transform, rotate(20deg));
+  }
+}
+
+@include keyframes(leg-right-lower) {
+  0% {
+    @include vendor-prefix(transform, rotate(0deg));
+  }
+
+  50% {
+    @include vendor-prefix(transform, rotate(60deg));
+  }
+
+  100% {
+    @include vendor-prefix(transform, rotate(0deg));
+  }
+}
+
+@include keyframes(leg-left-lower) {
+  0% {
+    @include vendor-prefix(transform, rotate(60deg));
+  }
+
+  50% {
+    @include vendor-prefix(transform, rotate(0deg));
+  }
+
+  100% {
+    @include vendor-prefix(transform, rotate(60deg));
+  }
+}
+
+@include keyframes(background-slide) {
+  0% {
+    margin-left: 0;
+  }
+
+  100% {
+    margin-left: -1600px;
+  }
+}
+
+// Styles
+
+.background {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  
+  &.back {
+    @include vendor-prefix(animation, background-slide linear 40s infinite);
+    z-index: 1;
+  }
+
+  &.second {
+    left: 798px;
+    transform: scaleX(-1);
+  }
+
+  &.third {
+    left: 1596px;
+  }
+
+  &.middle {
+    @include vendor-prefix(animation, background-slide linear 20s infinite);
+    z-index: 2;
+  }
+
+  &.front {
+    @include vendor-prefix(animation, background-slide linear 10s infinite);
+    z-index: 3;
+  }
+}
+
+#main {
+  text-align: center;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  @include vendor-prefix(transform, translate(-50%, -20%));
+}
+
+#play-area {
+  position: relative;
+  width: 800px;
+  height: 300px;
+  border: 1px solid black;
+  margin: 0px auto;
+  background-color: rgb(197, 249, 255);
+  overflow: hidden;
+}
+
+#runner {
+  position: absolute;
+  left: $body-width * 1.5;
+  height: $body-height;
+  z-index: 100;
+  @include vendor-prefix(transform, rotate(5deg));
+  @include vendor-prefix(animation, bounce $body-animation-timing-function $body-animation-time infinite);
+
+  .head {
+    width: $body-width;
+    height: $body-height / 2;
+    border-radius: $body-width;
+    position: absolute;
+    top: -($body-width * 1.25);
+    background-color: $body-color;
+    border: $body-border;
+  }
+
+  .upper-arm {
+    width: $body-width / 2;
+    height: $body-height / 2;
+    position: absolute;
+    left: $body-width / 4;
+    top: 0;
+    background-color: $body-color;
+    border: $body-border;
+    border-radius: $body-width;
+    @include vendor-prefix(transform-origin, 50% 20%);
+
+    .lower {
+      width: $body-width / 2;
+      height: $body-height / 2;
+      position: absolute;
+      top: $body-height / 4;
+      left: $body-width / 10;
+      background-color: $body-color;
+      border: $body-border;
+      border-top: 0;
+      border-radius: $body-width;
+      @include vendor-prefix(transform-origin, 50% 20%);
+      @include vendor-prefix(transform, rotate(-100deg));
+    }
+
+    &.left {
+      @include vendor-prefix(animation, upper-arm-left $body-animation-timing-function ($body-animation-time * 2) infinite);
+    }
+
+    &.right {
+      @include vendor-prefix(animation, upper-arm-right $body-animation-timing-function ($body-animation-time * 2) infinite);
+    }
+  }
+
+  .leg {
+    width: $body-width / 2;
+    height: $body-height * 3 / 4;
+    position: absolute;
+    left: $body-width / 4;
+    bottom: -($body-height / 2);
+    background-color: $body-color;
+    border: $body-border;
+    border-radius: $body-width;
+    @include vendor-prefix(transform-origin, 50% 20%);
+
+    .lower {
+      left: -($body-width / 20);
+      border-top: 0;
+    }
+
+    &.left {
+      @include vendor-prefix(animation, leg-left $body-animation-timing-function ($body-animation-time * 2) infinite);
+
+      .lower {
+        @include vendor-prefix(animation, leg-left-lower $body-animation-timing-function ($body-animation-time * 2) infinite);
+      }
+    }
+
+    &.right {
+      @include vendor-prefix(animation, leg-right $body-animation-timing-function ($body-animation-time * 2) infinite);
+
+      .lower {
+        @include vendor-prefix(animation, leg-right-lower $body-animation-timing-function ($body-animation-time * 2) infinite);
+      }
+    }
+  }
+}
