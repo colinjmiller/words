@@ -808,6 +808,42 @@ input[type="checkbox"], input[type="radio"] {
     -moz-transform: rotate(0deg);
     -o-transform: rotate(0deg);
     transform: rotate(0deg); } }
+@-webkit-keyframes throb {
+  0% {
+    background-color: white; }
+
+  50% {
+    background-color: #FFDDDD; }
+
+  100% {
+    background-color: white; } }
+@-moz-keyframes throb {
+  0% {
+    background-color: white; }
+
+  50% {
+    background-color: #FFDDDD; }
+
+  100% {
+    background-color: white; } }
+@-o-keyframes throb {
+  0% {
+    background-color: white; }
+
+  50% {
+    background-color: #FFDDDD; }
+
+  100% {
+    background-color: white; } }
+@keyframes throb {
+  0% {
+    background-color: white; }
+
+  50% {
+    background-color: #FFDDDD; }
+
+  100% {
+    background-color: white; } }
 .background {
   position: absolute;
   bottom: 0;
@@ -855,6 +891,11 @@ input[type="checkbox"], input[type="radio"] {
   transform: translate(-50%, -20%); }
 
 #play-area {
+  -webkit-transition: height 1s ease-in-out;
+  -ms-transition: height 1s ease-in-out;
+  -moz-transition: height 1s ease-in-out;
+  -o-transition: height 1s ease-in-out;
+  transition: height 1s ease-in-out;
   position: relative;
   width: 800px;
   height: 300px;
@@ -862,6 +903,8 @@ input[type="checkbox"], input[type="radio"] {
   margin: 0px auto;
   background-color: #c5f9ff;
   overflow: hidden; }
+  #play-area.scores {
+    height: 700px; }
 
 #goal {
   display: inline-block;
@@ -884,7 +927,7 @@ input[type="checkbox"], input[type="radio"] {
   bottom: -20px; }
 
 .tire {
-  width: 64px; }
+  width: 96px; }
 
 .destroyer {
   z-index: 9;
@@ -1036,3 +1079,28 @@ input[type="checkbox"], input[type="radio"] {
   margin-top: 10px;
   font-size: 32px;
   text-align: center; }
+  #answer.scoring {
+    -webkit-animation: throb 2s infinite ease-in-out;
+    -ms-animation: throb 2s infinite ease-in-out;
+    -moz-animation: throb 2s infinite ease-in-out;
+    -o-animation: throb 2s infinite ease-in-out;
+    animation: throb 2s infinite ease-in-out; }
+
+ol {
+  list-style: none;
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0.5); }
+  ol li {
+    font-size: 25px;
+    margin-bottom: 10px;
+    text-align: left;
+    padding: 10px;
+    padding-left: 25px; }
+    ol li .score {
+      display: inline-block;
+      width: 4em; }
+
+.play-again {
+  display: none;
+  padding: 10px;
+  font-size: 30px; }

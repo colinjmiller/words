@@ -32,8 +32,8 @@
     {
       type: "tire",
       src: "assets/tire.png",
-      width: "64",
-      height: "64",
+      width: "96",
+      height: "96",
       speed: 1.5
     }
   ];
@@ -58,7 +58,7 @@
     });
     pickWord();
     obstacleTimer = setInterval(moveObstacles, 15);
-    runnerBounds = {x: $("#runner").offset().left, y: $("#runner").offset().top, width: $("#runner").width(), height: $("#runner").height()};
+    runnerBounds = {x: $("#runner").position().left, y: $("#runner").position().top, width: $("#runner").width(), height: $("#runner").height()};
   }
 
   function pickWord() {
@@ -86,7 +86,7 @@
     $(".obstacle").each(function() {
       var obj = $(this);
       obj.css({left: obj.position().left - obj.attr("speed") - (difficulty / 10) });
-      var boundingBox = {x: obj.offset().left, y: obj.offset().top, width: obj.width(), height: obj.height()};
+      var boundingBox = {x: obj.position().left, y: obj.position().top, width: obj.width(), height: obj.height()};
 
       if (obj.attr("status") === "active" && isCollide(boundingBox, runnerBounds)) {
         killRunner();
@@ -156,10 +156,15 @@
   function killRunner() {
     $("#runner").addClass("over");
     clearFields($("#answer"), $("#goal"));
+    $("#answer").off();
+    setTimeout(function() {
+      $("#play-area").addClass("scores");
+      getScores();
+    }, 1500);
   }
 
   function attachHandlers() {
-    $("#answer").keyup(function(evt) {
+    $("#answer").on('keyup', function(evt) {
       var field = $(this);
       var prev = difficulty;
       if (field.val() === goal) {
@@ -181,6 +186,40 @@
 
   function baseLog(x, y) {
     return Math.log(y) / Math.log(x);
+  }
+
+  function getScores() {
+    $.get('assets/scores.php', function(data) {
+      $("#goal").text("Your Score: " + streak);
+      $("#answer").attr("placeholder", "Submit your score by entering a username!").addClass("scoring");
+      $("#main > p").css("display", "none");
+      var scoresList = $("<ol/>").appendTo("#play-area");
+      attachScoreHandlers();
+      $.each(data, function(index, value) {
+        $("<li/>").html("<span class='score'>" + value.score + "</span><span class='name'>" + value.name + "</span>").appendTo(scoresList);
+      });
+    });
+  }
+
+  function attachScoreHandlers() {
+    $("#answer").on('keypress', function(evt) {
+      if (evt.which == 13) {
+        submitScore($(this).val(), streak);
+      }
+    });
+  }
+
+  function submitScore(name, score) {
+    $.post("assets/scores.php", {name: name, score: score})
+      .done(function(data) {
+        $("ol").remove();
+        $("#answer").remove();
+        $(".play-again").css("display", "block");
+        var scoresList = $("<ol/>").appendTo("#play-area");
+        $.each(data, function(index, value) {
+          $("<li/>").html("<span class='score'>" + value.score + "</span><span class='name'>" + value.name + "</span>").appendTo(scoresList);
+        });
+      });
   }
 
 }(window.jQuery, window, document));
