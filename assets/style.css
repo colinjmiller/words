@@ -803,9 +803,20 @@ input[type="checkbox"], input[type="radio"] {
   background-color: #c5f9ff;
   overflow: hidden; }
 
+#goal {
+  display: inline-block;
+  font-size: 40px;
+  margin: 10px; }
+
+.obstacle {
+  position: absolute;
+  bottom: 0;
+  right: -100px;
+  z-index: 9; }
+
 #runner {
   position: absolute;
-  left: 30px;
+  left: 120px;
   height: 40px;
   z-index: 100;
   -webkit-transform: rotate(5deg);
@@ -913,3 +924,9 @@ input[type="checkbox"], input[type="radio"] {
         -moz-animation: leg-right-lower cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s infinite;
         -o-animation: leg-right-lower cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s infinite;
         animation: leg-right-lower cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s infinite; }
+
+#answer {
+  width: 800px;
+  margin-top: 10px;
+  font-size: 32px;
+  text-align: center; }

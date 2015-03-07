@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>Trip Up</title>
-    <!-- <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+    <!-- <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
     <link href="assets/style.css" rel="stylesheet" />
     <script src="assets/scripts.js"></script>
   </head>
@@ -11,6 +11,7 @@
     <div id="main">
       <h1>Trip Up</h1>
       <div id="play-area">
+        <span id="goal">Loading...</span>
         <div id="runner">
           <div class="head"></div>
           <div class="upper-arm left">
@@ -36,6 +37,11 @@
         <img class="background front second" src="assets/land-2.svg" alt="Medium-speed background" />
         <img class="background front third" src="assets/land-2.svg" alt="Medium-speed background" />
       </div>
+      <input id="answer" type="text" placeholder="Type Here" />
+      <p>
+        Current Streak:
+        <span id="streak">0</span>
+      </p>
     </div>
   </body>
 </html>

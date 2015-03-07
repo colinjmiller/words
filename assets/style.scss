@@ -193,9 +193,22 @@ $body-animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1.0);
   overflow: hidden;
 }
 
+#goal {
+  display: inline-block;
+  font-size: 40px;
+  margin: 10px;
+}
+
+.obstacle {
+  position: absolute;
+  bottom: 0;
+  right: -100px;
+  z-index: 9;
+}
+
 #runner {
   position: absolute;
-  left: $body-width * 1.5;
+  left: $body-width * 6;
   height: $body-height;
   z-index: 100;
   @include vendor-prefix(transform, rotate(5deg));
@@ -277,4 +290,11 @@ $body-animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1.0);
       }
     }
   }
+}
+
+#answer {
+  width: 800px;
+  margin-top: 10px;
+  font-size: 32px;
+  text-align: center;
 }
