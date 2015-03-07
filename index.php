@@ -36,6 +36,9 @@
         <img class="background front" src="assets/land-2.svg" alt="Medium-speed background" />
         <img class="background front second" src="assets/land-2.svg" alt="Medium-speed background" />
         <img class="background front third" src="assets/land-2.svg" alt="Medium-speed background" />
+        <img class="destroyer" id="storm-cloud" src="assets/storm-cloud.svg" alt="storm cloud" />
+        <img class="destroyer" id="boot" src="assets/boot.svg" alt="boot" />
+        <img class="destroyer" class="active goingback" id="nyan" src="assets/nyan.gif" alt="nyan cat" />
       </div>
       <input id="answer" type="text" placeholder="Type Here" />
       <p>

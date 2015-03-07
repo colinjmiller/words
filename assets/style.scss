@@ -143,6 +143,16 @@ $body-animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1.0);
   }
 }
 
+@include keyframes(roll) {
+  0% {
+    @include vendor-prefix(transform, rotate(360deg));
+  }
+
+  100% {
+    @include vendor-prefix(transform, rotate(0deg));
+  }
+}
+
 // Styles
 
 .background {
@@ -157,7 +167,7 @@ $body-animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1.0);
 
   &.second {
     left: 798px;
-    transform: scaleX(-1);
+    @include vendor-prefix(transform, scaleX(-1));
   }
 
   &.third {
@@ -197,13 +207,60 @@ $body-animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1.0);
   display: inline-block;
   font-size: 40px;
   margin: 10px;
+  cursor: default;
+  @include vendor-prefix(user-select, none);
 }
 
 .obstacle {
   position: absolute;
   bottom: 0;
-  right: -100px;
+  z-index: 8;
+}
+
+.stone {
+  width: 128px;
+  bottom: -20px;
+}
+
+.tire {
+  width: 64px;
+}
+
+.destroyer {
   z-index: 9;
+  position: absolute;
+}
+
+#storm-cloud {
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity .2s linear;
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+#boot {
+  top: -300px;
+  transition: top .4s ease-in;
+
+  &.active {
+    top: 0px;
+  }
+}
+
+#nyan {
+  width: 800px;
+  left: -800px;
+  top: -100px;
+  transition: all 1s linear;
+
+  &.active {
+    left: 800px;
+    top: 300px;
+  }
 }
 
 #runner {
@@ -289,6 +346,11 @@ $body-animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1.0);
         @include vendor-prefix(animation, leg-right-lower $body-animation-timing-function ($body-animation-time * 2) infinite);
       }
     }
+  }
+
+  &.over {
+    @include vendor-prefix(transition, left 2s ease-in);
+    left: -100px;
   }
 }
 
